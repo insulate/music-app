@@ -15,6 +15,7 @@ module.exports = {
     'semi': ['error', 'always'],
     'indent': ['error', 2],
     'no-multi-spaces': ['error'],
+    'max-len': ['error', { "code": 200 }],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },
