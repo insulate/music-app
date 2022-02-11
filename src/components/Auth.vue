@@ -90,7 +90,7 @@
           </form>
           <!-- Registration Form -->
           <!-- https://vee-validate.logaretm.com/v4/guide/global-validators#@vee-validate/rules -->
-          <VeeForm v-show="tab === 'register'" :validation-schema="schema" @submit="register">
+          <VeeForm v-show="tab === 'register'" :validation-schema="schema" @submit="register" :initial-values="userData">
             <!-- Name -->
             <div class="mb-3">
               <label class="inline-block mb-2">Name</label>
@@ -124,14 +124,24 @@
               <ErrorMessage class="text-red-500" name="age" />
             </div>
             <!-- Password -->
+            <!-- show multiple errors -->
             <div class="mb-3">
               <label class="inline-block mb-2">Password</label>
               <VeeField
-               name="password"
-                type="password"
-                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
-                placeholder="Password"
-              />
+              name="password"
+              :bails="false"
+              v-slot="{ field, errors }"
+              >
+              <input
+              type="password"
+              placeholder="Password"
+              class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+              v-bind="field"
+               />
+               <div class="text-red-500" v-for="error in errors" :key="error">
+                 {{ error }}
+               </div>
+              </VeeField>
               <ErrorMessage class="text-red-500" name="password" />
             </div>
             <!-- Confirm Password -->
@@ -200,6 +210,15 @@ export default {
         confirm_password: 'confirmed:@password',
         country: 'required|excluded:Antarctica',
         tos: 'required',
+      },
+      userData: {
+        name: '',
+        email: '',
+        age: '',
+        password: '',
+        confirm_password: '',
+        country: 'USA',
+        tos: '',
       },
     };
   },
