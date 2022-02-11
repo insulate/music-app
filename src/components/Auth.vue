@@ -89,6 +89,9 @@
             </button>
           </form>
           <!-- Registration Form -->
+          <div class="text-white text-center font-bold p-5 mb-4" v-if="reg_show_alert" :class="reg_alert_variant">
+            {{ reg_alert_msg }}
+          </div>
           <!-- https://vee-validate.logaretm.com/v4/guide/global-validators#@vee-validate/rules -->
           <VeeForm v-show="tab === 'register'" :validation-schema="schema" @submit="register" :initial-values="userData">
             <!-- Name -->
@@ -182,6 +185,7 @@
               <ErrorMessage class="text-red-500" name="tos" />
             </div>
             <button
+            :disabled="reg_in_submission"
               type="submit"
               class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
             >
@@ -220,6 +224,10 @@ export default {
         country: 'USA',
         tos: '',
       },
+      reg_in_submission: false,
+      reg_show_alert: false,
+      reg_alert_variant: 'bg-blue-500',
+      reg_alert_msg: 'Please wait! Your account is being created.',
     };
   },
   computed: {
@@ -230,8 +238,15 @@ export default {
   },
   methods: {
     ...mapMutations(['toggleAuthModal']),
-    register() {
-      // console.log(values);
+    register(values) {
+      this.reg_show_alert = true;
+      this.reg_in_submission = true;
+      this.reg_alert_variant = 'bg-blue-500';
+      this.reg_alert_msg = 'Please wait! Your account is being created.';
+
+      this.reg_alert_variant = 'bg-green-500';
+      this.reg_alert_msg = 'Success! Your account has been created.';
+      console.log(values);
     },
   },
 };
