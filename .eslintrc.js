@@ -12,6 +12,7 @@ module.exports = {
   },
   rules: {
     'max-len': ["error", { "code": 200 }],
+    'linebreak-style': ["error", "windows"],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },

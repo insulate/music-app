@@ -1,5 +1,5 @@
 <template>
-  <header id="header" class="bg-gray-700">
+  <header class="bg-gray-700">
     <nav class="container mx-auto flex justify-start items-center py-5 px-4">
       <!-- App Name -->
       <a class="text-white font-bold uppercase text-2xl mr-4" href="#">Music</a>
@@ -26,7 +26,7 @@
 import { mapMutations } from 'vuex';
 
 export default {
-  name: 'header',
+  name: 'AppHeader',
   methods: {
     ...mapMutations(['toggleAuthModal']),
     // toggleAuthModal() {

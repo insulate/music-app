@@ -29,7 +29,6 @@ export default {
     // custom message from error
     configure({
       generateMessage: (ctx) => {
-        console.log(ctx.rule.params[0]);
         const messages = {
           required: `ช่อง ${ctx.field} ต้องไม่ว่าง`,
           min: `The fiend ${ctx.field} must be at least ${ctx.rule.params.length ? ctx.rule.params[0] : ''} characters`,
