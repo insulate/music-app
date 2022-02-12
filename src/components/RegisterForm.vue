@@ -113,7 +113,6 @@
 </template>
 
 <script>
-import firebase from '@/includes/firebase';
 
 export default {
   name: 'RegisterForm',
@@ -149,9 +148,8 @@ export default {
       this.reg_in_submission = true;
       this.reg_alert_variant = 'bg-blue-500';
       this.reg_alert_msg = 'Please wait! Your account is being created.';
-      let userCreated;
       try {
-        userCreated = await firebase.auth().createUserWithEmailAndPassword(values.email, values.password);
+        await this.$store.dispatch('register', values);
       } catch (error) {
         console.log(error.message);
         this.reg_in_submission = false;
@@ -164,7 +162,6 @@ export default {
 
       this.reg_alert_variant = 'bg-green-500';
       this.reg_alert_msg = 'Success! Your account has been created.';
-      console.log(userCreated);
     },
   },
 };
