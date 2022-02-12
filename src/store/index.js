@@ -36,6 +36,11 @@ export default createStore({
 
       ctx.commit('toggleAuth');
     },
+    async login(ctx, payload) {
+      await auth.signInWithEmailAndPassword(payload.email, payload.password);
+
+      this.commit('toggleAuth');
+    },
     init_login({ commit }) {
       const user = auth.currentUser;
 
