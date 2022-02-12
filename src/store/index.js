@@ -29,12 +29,19 @@ export default createStore({
         tos: payload.tos,
         created_at: new Date().toISOString(),
       });
-
+      // update unique userid ไปยัง authentication ของ firebase
       await userCred.user.updateProfile({
         displayName: payload.name,
       });
 
       ctx.commit('toggleAuth');
+    },
+    init_login({ commit }) {
+      const user = auth.currentUser;
+
+      if (user) {
+        commit('toggleAuth');
+      }
     },
   },
 });
