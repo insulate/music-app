@@ -48,5 +48,10 @@ export default createStore({
         commit('toggleAuth');
       }
     },
+    async logout(ctx) {
+      await auth.signOut();
+
+      ctx.commit('toggleAuth');
+    },
   },
 });
